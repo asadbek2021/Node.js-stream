@@ -16,6 +16,13 @@ const users = [
 
 const server = http.createServer();
 server.on('request',(request,response)=>{
+
+    if(request.method !== 'GET'){
+        response.writeHead(400,{
+            'Content-Type':'text/plain'
+        });
+        response.end(`${request.method} is not supported`)
+    }
     switch(request.url){
         case '/users':
             response.writeHead(200,{
